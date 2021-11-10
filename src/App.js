@@ -76,7 +76,9 @@ function App() {
     <div className={s.app}>
       <Searchbar onSubmit={getQueryFromInput} />
 
-      {(error || status === "error") && <ErrorView />}
+      {status === "error" && <ErrorView />}
+
+      {error && <h1>{error.message}</h1>}
 
       <ImageGallery images={images} onModalshow={getItemfromClick} />
 
