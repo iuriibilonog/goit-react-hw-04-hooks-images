@@ -18,10 +18,16 @@ function App() {
   const [modalShow, setModalShow] = useState(false);
   const [largeImageUrl, setLargeImageUrl] = useState("");
 
-  // const isFirstRender = useRef(true);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
-    if (query === "") return;
+    if ((query === "") & isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    if ((query === "") & !isFirstRender.current) {
+      return alert("Введите ключевое слово для поиска!)");
+    }
     getPictures();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query, page]);
@@ -33,10 +39,6 @@ function App() {
   };
 
   const getPictures = () => {
-    // if (query === "") {
-    //   return alert("Введите ключевое слово для поиска!)");
-    // }
-
     setStatus(null);
     setIsLoading(true);
 
